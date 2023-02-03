@@ -1,0 +1,173 @@
+<mat-toolbar style="z-index: 1000" color="primary">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="isHandset$ | async"
+  >
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <span class="custom-font-style-1">Photo Gallery</span>
+
+  <span class="example-spacer"></span>
+
+  <div class="search-form-div ml-2 mr-2">
+    <mat-form-field
+      class="w-100"
+      floatLabel="never"
+      appearance="outline"
+    >
+      <mat-label>
+        <span class="custom-font-style-2">Search images</span>
+      </mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+  <ng-container *ngIf="! (isHandset$ | async)">
+    <!-- Images upload -->
+    <ng-container *ngIf="photosActive.isActive">
+      <button
+        mat-button
+        (click)="openUploadDialog()"
+        *ngIf="!(isMediumDevice$1 | async)"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+        <span class="ml-1 custom-font-style-2">Upload</span>
+      </button>
+      <button
+        (click)="openUploadDialog()"
+        *ngIf="isMediumDevice$1 | async"
+        mat-icon-button
+        aria-label="Upload button"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    </ng-container>
+
+    <!-- Create album -->
+    <ng-container *ngIf="albumsActive.isActive">
+      <button
+        mat-button
+        (click)="openCreateAlbumDialog()"
+        *ngIf="!(isMediumDevice$1 | async)"
+      >
+        <mat-icon>create_new_folder</mat-icon>
+        <span class="ml-1 custom-font-style-2">Album</span>
+      </button>
+      <button
+        (click)="openCreateAlbumDialog()"
+        *ngIf="isMediumDevice$1 | async"
+        mat-icon-button
+        aria-label="Upload button"
+      >
+        <mat-icon>create_new_folder</mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="showBtn$ | async">
+      <button
+        mat-button
+        *ngIf="!(isMediumDevice$1 | async)"
+        (click)="addImagesToAlbum()"
+      >
+        <mat-icon>add_to_photos</mat-icon>
+        Add images
+      </button>
+      <button
+        *ngIf="isMediumDevice$1 | async"
+        mat-icon-button
+        aria-label="Add button"
+        (click)="addImagesToAlbum()"
+      >
+        <mat-icon>add_to_photos</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu for user">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <span class="custom-font-style-2">{{ userDetails.email }}</span>
+    </button>
+    <button
+      mat-menu-item
+      routerLink="/user-form"
+      [queryParams]="{ edit: true }"
+    >
+      <mat-icon>manage_accounts</mat-icon>
+      <span class="custom-font-style-2">Edit profile</span>
+    </button>
+    <button
+      (click)="openUploadDialog()"
+      mat-menu-item
+      *ngIf="(isHandset$ | async) && photosActive.isActive"
+    >
+      <mat-icon>cloud_upload</mat-icon>
+      <span class="custom-font-style-2">Upload photos</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="openCreateAlbumDialog()"
+      *ngIf="(isHandset$ | async) && albumsActive.isActive"
+    >
+      <mat-icon>create_new_folder</mat-icon>
+      <span class="custom-font-style-2">Create Album</span>
+    </button>
+    <button
+      mat-menu-item
+      *ngIf="(isHandset$ | async) && (showBtn$ | async)"
+      (click)="addImagesToAlbum()"
+    >
+      <mat-icon>add_to_photos</mat-icon>
+      Add images
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span class="custom-font-style-2">Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list class="mt-4 mr-4">
+      <a mat-list-item routerLink="/app/images" [ngClass]="{'active': photosActive.isActive}" #photosActive="routerLinkActive" routerLinkActive="active">
+        <mat-icon>photo</mat-icon>
+        <span class="ml-3 custom-font-style-1">Photos</span>
+      </a>
+      <a mat-list-item routerLink="/app/albums" [ngClass]="{'active': albumsActive.isActive}" #albumsActive="routerLinkActive" routerLinkActive="active">
+        <mat-icon>photo_album</mat-icon>
+        <span class="ml-3 custom-font-style-1">Album</span>
+      </a>
+      <a mat-list-item routerLink="/app/favorite" [ngClass]="{'active': favoriteActive.isActive}" #favoriteActive="routerLinkActive" routerLinkActive="active">
+        <mat-icon>star</mat-icon>
+        <span class="ml-3 custom-font-style-1">Favorite</span>
+      </a>
+      <a mat-list-item routerLink="/app/explore" [ngClass]="{'active': exploreActive.isActive}" #exploreActive="routerLinkActive" routerLinkActive="active">
+        <mat-icon>rocket_launch</mat-icon>
+        <span class="ml-3 custom-font-style-1">Explore</span>
+      </a>
+      <a mat-list-item routerLink="/app/trash" [ngClass]="{'active': trashActive.isActive}" #trashActive="routerLinkActive" routerLinkActive="active">
+        <mat-icon>delete_outline</mat-icon>
+        <span class="ml-3 custom-font-style-1">Trash</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="p-3">
+      <!-- <app-image-container></app-image-container> -->
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

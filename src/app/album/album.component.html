@@ -1,0 +1,14 @@
+<div class="media-container">
+  <div class="card" *ngFor="let album of availableAlbums; let index = index">
+    <div class="card-header">
+      <span>{{album.albumName}}</span>
+      <span class="float-right hover-pointer" (click)="editAlbumName(album)"><mat-icon>edit</mat-icon></span>
+      <span class="float-right hover-pointer" (click)="deleteAlbum(album)"><mat-icon>delete</mat-icon></span>
+    </div>
+    <img (click)="openAlbum(album.albumName)" class="hover-pointer" *ngIf="album.albumThumbnail" src="{{album.albumThumbnail}}" alt="{{album.albumName}}">
+  </div>
+</div>
+
+<app-no-media *ngIf="availableAlbums == undefined || availableAlbums.length == 0">
+  No album available
+</app-no-media>

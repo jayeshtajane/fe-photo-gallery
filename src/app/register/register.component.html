@@ -1,0 +1,75 @@
+<div class="page-bg">
+  <div class="card">
+    <article class="card-body mx-auto" style="max-width: 400px">
+      <h4 class="card-title mt-3 text-center">{{isEdit ? 'Update Account' : 'Create Account'}}</h4>
+      <p *ngIf="!isEdit" class="text-center">Get started with your free account</p>
+      <form>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            name="name"
+            class="form-control"
+            placeholder="Full name"
+            type="text"
+            [(ngModel)]="user.name"
+          />
+        </div>
+        <!-- form-group// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+          <input
+            name="email"
+            class="form-control"
+            placeholder="Email address"
+            type="email"
+            [disabled]="isEdit"
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <!-- form-group end.// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input
+            name="password"
+            class="form-control"
+            placeholder="Create password"
+            type="password"
+            [(ngModel)]="user.password"
+          />
+        </div>
+        <!-- form-group// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input
+          name="repeatPassword"
+            class="form-control"
+            placeholder="Repeat password"
+            type="password"
+            [(ngModel)]="user.repeatPassword"
+          />
+        </div>
+        <!-- form-group// -->
+        <div class="form-group">
+          <button (click)="saveUser()" type="submit" class="btn btn-primary btn-block">
+            {{this.isEdit ? 'Update' : 'Create Account'}}
+          </button>
+        </div>
+        <!-- form-group// -->
+        <p *ngIf="!isEdit" class="text-center">Have an account? <a routerLink="/login">Log In</a></p>
+        <p *ngIf="isEdit" class="text-center"><button mat-button (click)="goBack()">Go Back</button></p>
+      </form>
+    </article>
+  </div>
+  <!-- card.// -->
+</div>
+<!--container end.//-->

@@ -1,0 +1,19 @@
+<div>
+  <p>
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Album name"
+        name="albumName"
+        [(ngModel)]="albumName"
+      />
+    </mat-form-field>
+  </p>
+
+  <div class="button">
+    <button [hidden]="rename" [disabled]="albumName == undefined || albumName.length == 0" color="primary" (click)="createAlbum()" mat-raised-button>Create</button>
+    <button [hidden]="!rename" [disabled]="albumName == undefined || albumName.length == 0" color="primary" (click)="renameAlbum()" mat-raised-button>Rename</button>
+    <button mat-raised-button mat-dialog-close class="ml-2">Cancel</button>
+  </div>
+</div>

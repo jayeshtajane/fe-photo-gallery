@@ -1,0 +1,5 @@
+.tui-image-editor-header .tui-image-editor-header-logo,
+.tui-image-editor-header .tui-image-editor-header-buttons .tui-image-editor-download-btn,
+.tui-image-editor-header .tui-image-editor-header-buttons div {
+  display: none;
+}

@@ -1,0 +1,9 @@
+<div class="media-container">
+  <div (click)="openImage(index)" class="card hover-pointer" *ngFor="let image of availableImages; let index = index">
+    <img *ngIf="image.url" [src]="image.url | safeUrl" alt="{{image.originalFilename}}">
+  </div>
+</div>
+
+<app-no-media *ngIf="availableImages == undefined || availableImages.length == 0">
+  No media available in this album
+</app-no-media>

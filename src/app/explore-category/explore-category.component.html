@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="search-form-div ml-2 mr-2">
+    <mat-form-field
+      class="w-100"
+      floatLabel="never"
+      appearance="outline"
+      [(ngModel)]="searchText"
+      name="searchText"
+      ngDefaultControl
+      (ngModelChange)="search()"
+    >
+      <mat-label>
+        <span class="custom-font-style-2">Search images</span>
+      </mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+</div>
+
+<div>
+  <div class="media-container">
+    <div class="card" *ngFor="let image of availableImages; let index = index">
+      <img *ngIf="image.url" [src]="image.url | safeUrl" alt="{{image.originalFilename}}">
+      <div class="overlay"></div>
+      <div class="info-container w-100">
+        <div class="top-button-container border-bottom w-100">
+          <a (click)="setFavorite(image, $event)" href="#" [hidden]="!image.favorite"><i class="fa fa-star"></i></a>
+          <a (click)="setFavorite(image, $event)" href="#" [hidden]="image.favorite"><i class="fa fa-star-o"></i></a>
+          <a (click)="moveToTrash(image, index, $event)" href="#" class="ml-3"><i class="fa fa-trash-o"></i></a>
+          <a (click)="editImage(image, index, $event)" href="#" class="ml-3"><i class="fa fa-edit"></i></a>
+        </div>
+        <div (click)="openImage(index)" class="hover-pointer middle-button-container d-flex align-items-center justify-content-center">
+          <span>View</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-no-media *ngIf="availableImages == undefined || availableImages.length == 0">
+    No media available
+  </app-no-media>
+
+</div>

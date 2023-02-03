@@ -1,0 +1,72 @@
+<!-- <h2>Tags</h2>
+
+<div>
+  <button mat-raised-button color="primary">
+    <mat-icon>star</mat-icon>
+    <span class="ml-1">Favorite</span>
+  </button>
+  <button class="ml-2" mat-raised-button color="primary">
+    <mat-icon>draw</mat-icon>
+    <span class="ml-1">Edited</span>
+  </button>
+  <button class="ml-2" mat-raised-button color="primary">
+    <mat-icon>screenshot</mat-icon>
+    <span class="ml-1">Screenshots</span>
+  </button>
+  <button class="ml-2" mat-raised-button color="primary">
+    <mat-icon>camera_front</mat-icon>
+    <span class="ml-1">Selfies</span>
+  </button>
+  <button class="ml-2" mat-raised-button color="primary">
+    <mat-icon>diversity_3</mat-icon>
+    <span class="ml-1">Group photos</span>
+  </button>
+</div>
+
+<div class="mt-5"></div>
+
+<h2>Places</h2>
+
+<div *ngIf="availableCategories.length == 0">
+  <p>No places available</p>
+</div>
+
+<div class="media-container" *ngIf="availableCategories.length > 0">
+  <div class="card" *ngFor="let album of availableCategories; let index = index">
+    <div class="card-header">
+      <span>{{album.albumName}}</span>
+    </div>
+    <img (click)="openCategory(album.albumName, 'location')" class="hover-pointer" *ngIf="album.albumThumbnail" src="{{album.albumThumbnail}}" alt="{{album.albumName}}">
+  </div>
+  <div class="align-self-center">
+    <a routerLink="/app/places">View All</a>
+  </div>
+</div> -->
+
+<button (click)="openCategory('')" mat-raised-button color="primary">
+  <span>Go for search</span>
+</button>
+
+
+<div class="mt-5"></div>
+
+<h2>Things</h2>
+
+<div *ngIf="availableThings.length == 0">
+  <p>No things available</p>
+</div>
+
+<div class="media-container" *ngIf="availableThings.length > 0">
+  <!-- <div class="card" *ngFor="let album of availableThings; let index = index">
+    <div class="card-body">
+      <span>{{album.albumName}}</span>
+    </div>
+    <img (click)="openCategory(album.albumName, 'things')" class="hover-pointer" *ngIf="album.albumThumbnail" src="{{album.albumThumbnail}}" alt="{{album.albumName}}">
+  </div> -->
+  <button (click)="openCategory(album.albumName)" class="{{index > 0 ? 'ml-2' : ''}}" mat-raised-button color="primary" *ngFor="let album of availableThings; let index = index">
+    <span>{{album.albumName}}</span>
+  </button>
+  <!-- <div class="align-self-center ml-2">
+    <a routerLink="/app/things">View All</a>
+  </div> -->
+</div>

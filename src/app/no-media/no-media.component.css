@@ -1,0 +1,15 @@
+.empty-folder {
+  text-align: center;
+  position: relative;
+  top: 30vh;
+}
+
+.empty-folder mat-icon {
+  font-size: 5rem;
+  opacity: 0.5;
+}
+
+.empty-folder span {
+  font-size: 1.5rem;
+  opacity: 0.5;
+}

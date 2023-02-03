@@ -1,0 +1,13 @@
+.image-selection-dialog .media-container .card {
+  width: 7rem;
+  height: 7rem;
+}
+
+.image-selection-dialog .media-container img {
+  object-fit: cover;
+}
+
+.selection-image {
+  position: absolute;
+  opacity: 0.5;
+}

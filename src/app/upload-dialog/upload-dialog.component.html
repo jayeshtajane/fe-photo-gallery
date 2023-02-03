@@ -1,0 +1,42 @@
+<input
+  type="file"
+  #file
+  style="display: none"
+  (change)="onFilesAdded()"
+  multiple
+/>
+<div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+  <h1 mat-dialog-title>Upload Files</h1>
+
+  <mat-dialog-content fxFlex>
+    <mat-list>
+      <mat-list-item *ngFor="let file of files">
+        <h4 mat-line>{{file.name}}</h4>
+        <mat-icon class="flex-end hover-pointer" (click)="removeFile(file)">clear</mat-icon>
+        <!-- <span class="flex-end">DDD</span> -->
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="actions">
+    <button
+      mat-raised-button
+      color="primary"
+      class="add-files-btn"
+      (click)="addFiles()"
+    >
+      Add Files
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="uploadFiles()"
+      [disabled]="files.size <= 0"
+    >
+      Upload
+    </button>
+
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

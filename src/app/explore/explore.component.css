@@ -1,0 +1,6 @@
+.media-container .card {
+  width: 18%;
+  object-fit: cover;
+  height: 200px;
+  margin: 1px;
+}

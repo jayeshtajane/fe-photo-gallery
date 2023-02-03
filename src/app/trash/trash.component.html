@@ -1,0 +1,18 @@
+<div class="media-container">
+  <div class="card" *ngFor="let image of availableImages; let index = index">
+    <img *ngIf="image.url" [src]="image.url | safeUrl" alt="{{image.originalFilename}}">
+    <div class="info-container w-100">
+      <div class="top-button-container border-bottom w-100">
+        <a (click)="restoreImage(image, index, $event)" href="#" class="ml-3"><i class="fa fa-repeat"></i></a>
+        <a (click)="deleteImage(image, index, $event)" href="#" class="ml-3"><i class="fa fa-trash-o"></i></a>
+      </div>
+      <div (click)="openImage(index)" class="hover-pointer middle-button-container d-flex align-items-center justify-content-center">
+        <span>View</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-no-media *ngIf="availableImages == undefined || availableImages.length == 0">
+  No media available
+</app-no-media>

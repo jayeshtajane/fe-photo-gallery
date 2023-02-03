@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Add images</h1>
+<mat-dialog-content>
+  <div class="image-selection-dialog">
+    <div class="media-container">
+      <div (click)="selectImage(image)" class="card hover-pointer" *ngFor="let image of availableImages; let index = index">
+        <img *ngIf="image.url" [src]="image.url | safeUrl" alt="{{image.originalFilename}}">
+        <img class="selection-image" *ngIf="image.selectionImage" src="{{image.selectionImage}}" alt="selection image">
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button [disabled]="selectedImages == undefined || selectedImages.length == 0" mat-raised-button color="primary" (click)="addImagesToAlbum()">Add</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
